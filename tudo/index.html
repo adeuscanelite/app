@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Adeus Canelite</title>
+<meta name="theme-color" content="#0d3b32">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+<link rel="apple-touch-icon" href="img/favicon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Adeus Canelite">
+<style>
+:root{
+  --pinho:#0d3b32; --pinho-esc:#082722; --pinho-prof:#051a17;
+  --menta:#e8f3ef; --menta2:#f4faf8; --papel:#fbfdfc;
+  --tinta:#14201d; --cinza:#5d6b67; --linha:#dfeae6;
+  --lar:#e2703a; --lar-esc:#c25a2a; --lar-bg:#fdf0e9;
+  --verde:#1e7d4f; --verde-bg:#e8f5ee;
+  --verm:#b3261e; --verm-bg:#fdeceb;
+  --amar:#b07d10; --amar-bg:#fdf5e3;
+  --r:14px; --r-lg:22px;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+  --serif:ui-serif,Georgia,'Times New Roman',serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);background:var(--papel);color:var(--tinta);
+  font-size:16px;line-height:1.55;overscroll-behavior-y:none}
+img{max-width:100%;display:block}
+button{font-family:inherit;font-size:inherit;cursor:pointer;border:none;background:none;color:inherit}
+
+.app{max-width:640px;margin:0 auto;min-height:100dvh;display:flex;flex-direction:column}
+.corpo{flex:1;padding:0 18px calc(84px + env(safe-area-inset-bottom))}
+
+/* ---------- TOPO ---------- */
+.topo{background:var(--pinho-prof);color:#fff;padding:calc(16px + env(safe-area-inset-top)) 18px 16px;
+  position:sticky;top:0;z-index:20}
+.topo .marca{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#8fd4bf;font-weight:800}
+.topo h1{font-size:21px;margin-top:3px;letter-spacing:-.3px;font-weight:800}
+.topo .sub{font-size:13.5px;color:#a9c7be;margin-top:2px}
+/* area de toque de 44px: o texto e pequeno, o alvo nao pode ser */
+.voltar{display:inline-flex;align-items:center;gap:6px;color:#8fd4bf;font-size:14px;
+  font-weight:600;margin-bottom:2px;min-height:44px;padding:4px 10px 4px 0}
+
+/* ---------- CARTÕES ---------- */
+.cartao{background:#fff;border:1px solid var(--linha);border-radius:var(--r-lg);
+  padding:18px 18px;margin-top:14px}
+.cartao h2{font-size:18px;letter-spacing:-.2px;margin-bottom:4px}
+.cartao p{font-size:15px;color:var(--cinza)}
+.olho{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--lar);
+  font-weight:800;margin-bottom:7px}
+
+/* ---------- PROGRESSO ---------- */
+.hoje{background:linear-gradient(160deg,var(--pinho) 0%,var(--pinho-prof) 100%);
+  color:#fff;border-radius:var(--r-lg);padding:22px 20px;margin-top:16px}
+.hoje .fase{font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#8fd4bf;font-weight:800}
+.hoje h2{font-size:25px;margin:6px 0 4px;letter-spacing:-.4px}
+.hoje .nota{font-size:14px;color:#c3ded5}
+.barra{height:8px;background:rgba(255,255,255,.14);border-radius:99px;margin-top:16px;overflow:hidden}
+.barra i{display:block;height:100%;background:var(--lar);border-radius:99px;transition:width .4s ease}
+.barra-txt{display:flex;justify-content:space-between;font-size:12.5px;color:#a9c7be;margin-top:7px}
+
+.semanas{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin-top:14px}
+.sem{aspect-ratio:1;border-radius:11px;background:var(--menta);border:1px solid var(--linha);
+  display:grid;place-items:center;font-size:13px;font-weight:800;color:var(--cinza);position:relative;
+  width:100%;padding:0;font-family:inherit}
+.sem:active{transform:scale(.94)}
+.sem.feita{background:var(--verde-bg);border-color:#bfe3d0;color:var(--verde)}
+.sem.agora{background:var(--lar);border-color:var(--lar);color:#fff;
+  box-shadow:0 6px 16px -8px rgba(226,112,58,.8)}
+
+/* ---------- LISTA DE EXERCÍCIOS ---------- */
+.ex{display:flex;gap:13px;align-items:center;background:#fff;border:1px solid var(--linha);
+  border-radius:var(--r);padding:11px;margin-top:10px;width:100%;text-align:left}
+.ex.ok{background:var(--verde-bg);border-color:#bfe3d0}
+.ex .mini{width:82px;height:58px;border-radius:9px;overflow:hidden;flex-shrink:0;background:var(--pinho-prof)}
+.ex .mini img{width:100%;height:100%;object-fit:cover}
+.ex .txt{flex:1;min-width:0}
+.ex .txt b{display:block;font-size:15px;line-height:1.25}
+.ex .txt span{font-size:13px;color:var(--cinza)}
+.ex .tick{width:26px;height:26px;border-radius:50%;border:2px solid var(--linha);flex-shrink:0;
+  display:grid;place-items:center;font-size:14px;color:#fff}
+.ex.ok .tick{background:var(--verde);border-color:var(--verde)}
+
+/* ---------- DETALHE DO EXERCÍCIO ---------- */
+.foto-ex{border-radius:var(--r-lg);overflow:hidden;margin-top:14px;background:var(--pinho-prof)}
+.dose{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.dose div{background:var(--menta2);border:1px solid var(--linha);border-radius:var(--r);padding:12px 13px}
+.dose b{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--cinza);margin-bottom:3px}
+.dose span{font-size:14.5px;font-weight:600}
+.passos{counter-reset:p;margin-top:8px}
+.passos li{list-style:none;counter-increment:p;position:relative;padding-left:32px;
+  margin-bottom:9px;font-size:15px}
+.passos li:before{content:counter(p);position:absolute;left:0;top:1px;width:22px;height:22px;
+  border-radius:50%;background:var(--lar);color:#fff;font-size:12px;font-weight:800;
+  display:grid;place-items:center}
+.aviso{border-radius:var(--r);padding:13px 15px;margin-top:12px;font-size:14.5px}
+.aviso.laranja{background:var(--lar-bg);border:1px solid #f6d5c3}
+.aviso.verde{background:var(--verde-bg);border:1px solid #bfe3d0}
+.aviso.vermelho{background:var(--verm-bg);border:1px solid #f3c9c5}
+.aviso.amarelo{background:var(--amar-bg);border:1px solid #efdcae}
+.aviso b{display:block;margin-bottom:3px}
+
+/* ---------- BOTÕES ---------- */
+.btn{display:block;width:100%;background:var(--lar);color:#fff;font-weight:800;
+  padding:16px;border-radius:99px;text-align:center;margin-top:18px;font-size:16px}
+.btn:active{background:var(--lar-esc)}
+.btn.sec{background:var(--menta);color:var(--tinta);border:1px solid var(--linha)}
+.btn.feito{background:var(--verde)}
+
+/* ---------- RÉGUA / TABELAS ---------- */
+.regua{margin-top:12px}
+.regua .r{display:flex;gap:11px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--linha)}
+.regua .r:last-child{border-bottom:none}
+/* as cores sao mau/meio/bom de proposito: 'aviso' ja e a caixa de aviso
+   do ecra de exercicio, e o padding dela inchava a bolinha */
+.regua .pt{width:9px;min-width:9px;height:9px;min-height:9px;border-radius:50%;
+  margin-top:7px;flex:0 0 9px;align-self:flex-start}
+.regua .pt.mau{background:var(--verm)} .regua .pt.meio{background:var(--amar)} .regua .pt.bom{background:var(--verde)}
+.regua .txt{flex:1;min-width:0}
+.regua .q{display:block;font-size:14.5px;font-weight:600;line-height:1.35}
+.regua .a{display:block;font-size:14px;color:var(--cinza);margin-top:3px;line-height:1.4}
+
+/* ---------- EXERCÍCIO DENTRO DA LESÃO (o upsell) ----------
+   A foto some sozinha (onerror no img) enquanto o cartão não existir,
+   para o ecrã não ficar com molduras vazias. */
+.ex-lesao{padding:14px 0;border-top:1px solid var(--linha)}
+/* o cartao gerado e quase quadrado, e a figura aparece de corpo inteiro:
+   cortar em 4:3 comia a cabeca e os pes, que e o que o cartao existe para
+   mostrar. Ratio do proprio cartao e contain, sem corte. */
+.foto-lesao{border-radius:var(--r);overflow:hidden;margin-bottom:10px;background:var(--pinho-prof);
+  aspect-ratio:1/.95;max-width:100%}
+.foto-lesao img{width:100%;height:100%;object-fit:contain}
+
+/* ---------- BLOQUEADO (o bump) ---------- */
+.bloq{position:relative;overflow:hidden}
+.bloq .veu{position:absolute;inset:0;background:rgba(251,253,252,.82);backdrop-filter:blur(3px);
+  display:grid;place-items:center;padding:20px;text-align:center;z-index:2;border-radius:var(--r-lg)}
+.bloq .veu .cad{font-size:30px;margin-bottom:8px}
+.bloq .veu b{display:block;font-size:16px;margin-bottom:4px}
+.bloq .veu p{font-size:14px;color:var(--cinza);max-width:30ch;margin:0 auto 14px}
+.bloq .veu a{display:inline-block;background:var(--lar);color:#fff;font-weight:800;
+  padding:12px 24px;border-radius:99px;text-decoration:none;font-size:15px}
+
+/* ---------- MENU DE BAIXO ---------- */
+.menu{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(255,255,255,.96);
+  backdrop-filter:blur(12px);border-top:1px solid var(--linha);
+  display:grid;grid-template-columns:repeat(4,1fr);
+  padding-bottom:env(safe-area-inset-bottom);max-width:640px;margin:0 auto}
+.menu button{padding:11px 4px 10px;display:flex;flex-direction:column;align-items:center;gap:3px;
+  font-size:10.5px;font-weight:700;color:var(--cinza);letter-spacing:.02em}
+.menu button.on{color:var(--lar)}
+.menu .ic{font-size:19px;line-height:1}
+
+.oculto{display:none !important}
+.fim{text-align:center;font-size:12.5px;color:var(--cinza);padding:26px 10px 6px;line-height:1.6}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <header class="topo" id="topo"></header>
+  <main class="corpo" id="corpo"></main>
+</div>
+
+<nav class="menu" id="menu">
+  <button data-ecra="hoje" class="on"><span class="ic">✓</span>Hoje</button>
+  <button data-ecra="programa"><span class="ic">☰</span>Programa</button>
+  <button data-ecra="correr"><span class="ic">▶</span>Voltar a correr</button>
+  <button data-ecra="saber"><span class="ic">?</span>Saber mais</button>
+</nav>
+
+<script src="dados.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
