@@ -11,7 +11,7 @@
    errado a quem comprou o bump. Ver memória liberacao-sobrevive-a-instalacao.
    ========================================================================= */
 
-const VERSAO = 'adeus-canelite-v7';
+const VERSAO = 'adeus-canelite-v8';
 const BASE = self.registration.scope;
 
 const ESSENCIAIS = [
